@@ -43,6 +43,7 @@
         ]
       }
     ],
+    "no-this-assignment": true,
     "no-console": [
       true,
       "debug",
