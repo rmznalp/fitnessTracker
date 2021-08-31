@@ -1,5 +1,5 @@
 # FitnessTracker
-Fitness Tracker with Angular Framework and Material UI Components with Angular Fire and FireAuth.
+Fitness Tracker with Angular Framework and Material UI Components with Angular Firebase and FireAuth.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
