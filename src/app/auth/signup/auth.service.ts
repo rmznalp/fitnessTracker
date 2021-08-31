@@ -19,33 +19,35 @@ export class AuthService {
     private trainingService: TrainingService
   ) {}
 
+  initAuthListener() {
+    this.fireAuth.authState.subscribe((user) => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.router.navigate(['/training']);
+      } else {
+        this.trainingService.cancelSubscription();
+        this.isAuthenticated = false;
+        this.authChange.next(false);
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
   registerUser(authData: AuthData) {
     this.fireAuth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .then((result) => {
-        this.authSuccessfully();
-      });
-  }
-
-  authSuccessfully() {
-    this.isAuthenticated = true;
-    this.authChange.next(true);
-    this.router.navigate(['/training']);
+      .then((result) => {});
   }
 
   login(authData: AuthData) {
     this.fireAuth
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then((result) => {
-        this.authSuccessfully();
-      });
+      .then((result) => {});
   }
 
   logout() {
-    this.trainingService.cancelSubscription();
-    this.isAuthenticated = false;
-    this.authChange.next(false);
-    this.router.navigate(['/login']);
+    this.fireAuth.signOut();
   }
 
   isAuth() {
